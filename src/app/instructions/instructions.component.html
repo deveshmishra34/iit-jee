@@ -11,7 +11,7 @@
     <div class="scroll-content">
       <p>
         View in:
-        <select>
+        <select [(ngModel)]="select">
           <option value="english">English</option>
           <option value="hindi">Hindi</option>
         </select>
@@ -19,9 +19,10 @@
 
       <div class="main-instructions" [ngSwitch]="instructionMode">
         <div class="instruction-content" *ngSwitchCase="'General'">
-          <h2>Important Notes</h2>
+          <h2 *ngIf="select == 'english'">Important Notes</h2>
+          <h2 *ngIf="select == 'hindi'">महत्वपूर्ण लेख</h2>
           <div class="instructions">
-            <ul>
+            <ul *ngIf="select == 'english'">
               <li>The purpose of this MOCK TEST is to familiarize the candidates with the Computer Based Test (CBT) environment
                 of the JEE (Advanced) – 2018.</li>
               <li>Candidates may use this MOCK TEST to get acclimatized with the functionalities of CBT.</li>
@@ -29,63 +30,17 @@
               <li>The type of questions and illustrative marking scheme in this MOCK TEST is in NO WAY INDICATIVE of the type
                 of questions and marking scheme of JEE (Advanced) – 2018 question paper.</li>
             </ul>
+            <ul *ngIf="select == 'hindi'">
+              <li>इस मॉक टेस्ट का उद्देश्य जेईई (एडवांस्ड) - 2018 के कंप्यूटर आधारित टेस्ट (सीबीटी) पर्यावरण के साथ उम्मीदवारों को परिचित करना है।</li>
+              <li>सीबीटी की क्रियाकलापों के साथ अनुकूलन पाने के लिए उम्मीदवार इस मॉक टेस्ट का उपयोग कर सकते हैं।</li>
+              <li>इस मॉक टेस्ट ने जेईई (एडवांस) के पिछले साल के सवालों का इस्तेमाल किया है।</li>
+              <li>इस मॉक टेस्ट में प्रश्नों के प्रकार और दृष्टांत अंकन योजना, प्रश्न के प्रकार और जेईई (एडवांस्ड) - 2018 प्रश्न पत्र की अंकन योजना के किसी भी तरह से संकेतक नहीं है।</li>
+            </ul>
           </div>
         </div>
 
         <div class="test-instruction-content" *ngSwitchCase="'Test'">
-          <p>Please read the instructions carefully</p>
-          <h4>Important Notes</h4>
-          <div class="instructions">
-            <ol>
-              <li>Total duration of examination is 180 minutes.</li>
-              <li>The clock will be set at the server. The countdown timer in the top right corner of screen will display the
-                remaining time available for you to complete the examination. When the timer reaches zero, the examination
-                will end by itself. You will not be required to end or submit your examination.</li>
-              <li>The Question Palette displayed on the right side of screen will show the status of each question using one
-                of the following symbols:</li>
-              <li>You can click on the "&gt;" arrow which appears to the left of question palette to collapse the question palette
-                thereby maximizing the question window. To view the question palette again, you can click on " &lt; " which
-                appears on the right side of question window.</li>
-              <li>You can click on your "Profile " image on top right corner of your screen to change the language during the
-                exam for entire question paper. On clicking of Profile image you will get a drop-down to change the question
-                content to the desired language.</li>
-              <li>You can click on
-                <img src="../../assets/images/Down.png " alt="scroll down"> to navigate to the bottom and
-                <img src="../../assets/images/Up.png " alt="scroll up "> navigate to the top of the question area, without scrolling.</li>
-              <h4>Navigating to questions</h4>
-              <li>To answer a question, do the following:</li>
-              <ol type="a">
-                <li>Click on the question number in the Question Palette at the right of your screen to go to that numbered question
-                  directly. Note that using this option does NOT save your answer to the current question.</li>
-                <li>Click on Save &amp; Next to save your answer for the current question and then go to the next question.</li>
-                <li>Click on
-                  <strong>Mark for Review &amp; Next</strong> to save your answer for the current question, mark it for review, and
-                  then go to the next question.</li>
-              </ol>
-              <h4>Answering a questions</h4>
-              <li>Procedure for answering a multiple choice type question:</li>
-              <ol type="a">
-                <li>To select your answer, click on the button of one of the options</li>
-                <li>To deselect your chosen answer, click on the button of the chosen option again or click on the Clear Response
-                  button</li>
-                <li>To change your chosen answer, click on the button of another option</li>
-                <li>To save your answer, you MUST click on the Save &amp; Next button</li>
-                <li>To mark the question for review, click on the
-                  <strong>Mark for Review &amp; Next</strong> button.</li>
-              </ol>
-              <h4>Navigating through sections</h4>
-              <li>Sections in this question paper are displayed on the top bar of the screen. Questions in a section can be viewed
-                by clicking on the section name. The section you are currently viewing is highlighted.</li>
-              <li>After clicking the Save &amp; Next button on the last question for a section, you will automatically be taken
-                to the first question of the next section.</li>
-              <li>You can shuffle between sections and questions anytime during the examination as per your convenience only
-                during the time stipulated.</li>
-              <li>Candidate can view the corresponding section summary as part of the legend that appears in every section above
-                the question palette.</li>
-              <h4>Instruction for images</h4>
-              <li>To zoom the image provided in the question roll over it.</li>
-            </ol>
-          </div>
+          <pp-test-instructions [language]="select"></pp-test-instructions>
         </div>
       </div>
     </div>
@@ -100,20 +55,26 @@
           </select>
         </p>
         <p class="condition-para">
-          <small>Please note all the question will appear in default language. The language can be changed for the particular question
+          <small *ngIf="select == 'english'">Please note all the question will appear in default language. The language can be changed for the particular question
             later on.</small>
+            <small *ngIf="select == 'hindi'">कृपया ध्यान दें कि सभी प्रश्न डिफ़ॉल्ट भाषा में दिखाई देंगे। भाषा को बाद में विशेष प्रश्न के लिए बदल दिया जा सकता है।</small>
         </p>
         <input type="checkbox" name="condition"> &nbsp;
-        <small>I have read and understood the instructions. All computer hardware alloted to me are in good condition. I declare
+        <small *ngIf="select == 'english'">I have read and understood the instructions. All computer hardware alloted to me are in good condition. I declare
           that I am not in a possession of / not wearing / not carrying any prohibited gadget like Mobile phone, bluetooth
           devices etc. / any prohibited material with me into the examination hall. I agree that in case of not adhering
           to the instructions. I shall be liable to be debarred from this Test and/or to disciplinary action, which may include
           ban from the future Tests / Examinations</small>
+          <small *ngIf="select == 'hindi'">मैंने निर्देश पढ़ लिया है और समझ लिया है। सभी कंप्यूटर हार्डवेयर मुझे आवंटित अच्छी स्थिति में हैं। मैं घोषणा करता / करती हूं कि मैं मोबाइल फोन, ब्लूटूथ डिवाइस आदि जैसे कोई निषिद्ध गैजेट नहीं पहने / परिधान में नहीं हूं / परीक्षा कक्ष में मेरे साथ कोई प्रतिबंधित सामग्री नहीं है। मैं सहमत हूं कि निर्देशों का पालन नहीं करने के मामले में। मुझे इस टेस्ट और / या अनुशासनिक कार्रवाई से बहिष्कृत करने के लिए उत्तरदायी होगा, जिसमें भविष्य की परीक्षा / परीक्षा से प्रतिबंध शामिल हो सकता है</small>
       </div>
       <button type="button" class="prev" *ngIf="instructionMode == 'Test'" (click)="toggleMode()">Previous</button>
       <button type="button" class="go" *ngIf="instructionMode == 'Test'" (click)="newTab()">I am ready to begin</button>
     </div>
   </div>
 
-  <div class="user-profile-section "></div>
+  <div class="user-profile-section ">
+    <img src="../assets/images/admin-icon.png" alt="user image">
+    <h2 *ngIf="select == 'english'">Student Name</h2>
+    <h2 *ngIf="select == 'hindi'">छात्र का नाम</h2>
+  </div>
 </div>

@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { InstructionsComponent } from "./instructions/instructions.component";
+import { TestInstructionsComponent } from './instructions/test-instructions/test-instructions.component';
 import { TestComponent } from "./test/test.component";
 
 const routes: Routes = [
@@ -15,6 +16,8 @@ const routes: Routes = [
     ],
     exports: [
         RouterModule
+    ],
+    providers: [
     ]
 })
 
@@ -22,5 +25,6 @@ export class AppRoutingModule { }
 
 export const RoutedComponents = [
     InstructionsComponent,
-    TestComponent
+    TestComponent,
+    TestInstructionsComponent
 ];

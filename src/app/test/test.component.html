@@ -4,8 +4,20 @@
   </div>
 
   <div class="test-modal-bars">
-    <a href="#">Question Paper</a>
-    <a href="#">Instructions</a>
+    <a href="javascript:void(0)" (click)="showPaper()">Question Paper</a>
+    <div class="modal" #questionModal>
+      <div class="modal-content">
+        <span id="" (click)="closeQuestionModal()">&times;</span>
+        <p>Question Paper goes here...</p>
+      </div>
+    </div>
+    <a href="javascript:void(0)" (click)="showInstruction()">Instructions</a>
+    <div class="modal" #instructionModal>
+      <div class="modal-content">
+        <span id="" (click)="closeInstructionModal()">&times;</span>
+        <pp-test-instructions></pp-test-instructions>
+      </div>
+    </div>
   </div>
 
   <div class="main-test-section">
@@ -49,16 +61,38 @@
     </div>
 
     <div class="bottom-section">
-      <div class="main-question-screen">
+      <div [ngClass]="{'main-question-screen': fullWidth, 'full-width': !fullWidth}">
         <div class="language-selection">
-          <p>View in: 
+          <p>View in:
             <select>
               <option value="english">English</option>
               <option value="hindi">Hindi</option>
             </select>
           </p>
         </div>
-        <div class="questions"></div>
+        <div class="questions">
+          <button type="button" (click)="fullWidth = !fullWidth">{{ fullWidth? '&gt;' : '&lt;' }}</button>
+          <div class="answer-input">
+            <input type="text" name="answer">
+            <div class="num-buttons">
+              <ul>
+                <li>BackSpace</li>
+                <li>9</li>
+                <li>8</li>
+                <li>7</li>
+                <li>6</li>
+                <li>5</li>
+                <li>4</li>
+                <li>3</li>
+                <li>2</li>
+                <li>1</li>
+                <li>0</li>
+                <li>.</li>
+                <li>-</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
         <div class="question-footer">
           <button type="button">Mark for Review &amp; Next</button>
@@ -67,26 +101,31 @@
         </div>
       </div>
 
-      <div class="question-status">
+      <div [ngClass]="{'question-status': fullWidth, 'hide-status': !fullWidth }">
         <div class="status-info">
           <div class="answered">
-            <p><span>0</span> &nbsp;&nbsp;Answered</p>
+            <p>
+              <span> 0</span> &nbsp;&nbsp;Answered</p>
           </div>
           <div class="not-answered">
-              <p><span>7</span> &nbsp;&nbsp;Not Answered</p>
+            <p>
+              <span> 7</span> &nbsp;&nbsp;Not Answered</p>
           </div>
           <div class="not-visited">
-              <p><span>0</span> &nbsp;&nbsp;Not Visited</p>
+            <p>
+              <span> 0</span> &nbsp;&nbsp;Not Visited</p>
           </div>
           <div class="review">
-              <p><span>0</span> &nbsp;&nbsp;Review Later</p>            
+            <p>
+              <span> 0</span> &nbsp;&nbsp;Review Later</p>
           </div>
           <div class="answered-review">
-              <p><span>0</span> &nbsp;&nbsp;Answered &amp; marked for Review Later (will be considered for evaluation)</p>
+            <p>
+              <span>0</span> &nbsp;&nbsp;Answered &amp; marked for Review Later (will be considered for evaluation)</p>
           </div>
         </div>
 
-        <div class="subject-section">
+        <div class="subject-question-section">
           <div class="subject-header">
             <h4>Phy Sec 1</h4>
           </div>

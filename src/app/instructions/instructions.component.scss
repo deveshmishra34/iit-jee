@@ -1,13 +1,11 @@
 .main-container {
     min-height: 100%;
     width: 100%;
-
     .title-bar {
         background-color: #525cec;
         color: #ffffff;
         padding: 1em;
     }
-
     .instruction-section {
         position: relative;
         width: 80%;
@@ -15,24 +13,20 @@
         background-color: #f7f5f5;
         border-right: 0.1em solid #000000;
         float: left;
-
         .instruction-heading {
             background-color: #8093e7;
             color: #ffffff;
             padding: 0.8em;
             letter-spacing: 0.1em;
         }
-
         .scroll-content {
             overflow: auto;
             height: 75vh;
         }
-
         p {
             float: right;
             padding: 0.3em;
             margin-bottom: 1em;
-
             select {
                 height: 2em;
                 line-height: 2em;
@@ -45,7 +39,6 @@
             display: block;
             clear: both;
         }
-
         .instruction-content {
             height: 100%;
             padding: 0 0 1.5em 1.5em;
@@ -53,11 +46,9 @@
             .instructions {
                 height: 68vh;
             }
-
             h2 {
                 margin-bottom: 0.8em;
             }
-
             ul {
                 li {
                     margin-bottom: 1.2em;
@@ -67,34 +58,11 @@
                     line-height: 1.3em;
                 }
             }
-        }
-
-        // test instruction content
+        } // test instruction content
         .test-instruction-content {
             clear: both;
             padding: 0 0 10em 1.5em;
-            
-            p {
-                text-align: center;
-                float: none;
-                font-size: 1.1em;
-            }
-
-            h4 {
-                text-decoration: underline;
-                margin-bottom: 1em;
-            }
-
-            ol {
-                margin-left: 1em;
-                margin-right: 1em;
-                
-                li {
-                    margin-bottom: 0.9em;
-                }
-            }
         }
-
         .instruction-footer {
             position: absolute;
             width: 100%;
@@ -102,7 +70,6 @@
             border-top: 0.1em solid #6d6c6c;
             padding: 0.4em 0.8em;
             background-color: #ffffff;
-
             button {
                 width: 7em;
                 height: 2.6em;
@@ -131,9 +98,14 @@
             }
         }
     }
-
     .user-profile-section {
+        width: 20%;
         height: 91vh;
-        background: linear-gradient(#ffffff, #a5a0a0);
+        float: right;
+        padding: 1em;
+        background: linear-gradient(#ffffff, #646363);
+        img {
+            width: 45%;
+        }
     }
 }

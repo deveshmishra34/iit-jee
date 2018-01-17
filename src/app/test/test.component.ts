@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { TestService } from "../services/test.service";
 
 @Component({
   selector: 'pp-test',
@@ -7,12 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestComponent implements OnInit {
 
-  constructor() { 
-    document.addEventListener('contextmenu', event => event.preventDefault()); 
+  @ViewChild('questionModal') questionModal: ElementRef;
+  @ViewChild('instructionModal') instructionModal: ElementRef;
+
+  fullWidth: boolean = true;
+  questions: any;
+
+  constructor(private rd: Renderer2, private testService: TestService) {
+    document.addEventListener('contextmenu', event => event.preventDefault());
     this.startTimer();
   }
 
   ngOnInit() {
+    this.testService.getQuestions().subscribe(
+      questions => console.log(questions),  //this.questions = questions,
+      err => console.log(err)
+    )
   }
 
   startTimer() {
@@ -35,9 +46,28 @@ export class TestComponent implements OnInit {
       if (distance < 0) {
         clearInterval(x);
         // todo when the time is over
-        // document.getElementById("timer").innerHTML = "EXPIRED";
       }
     }, 1000);
+  }
+
+  showPaper() {
+    var questionModal = this.questionModal.nativeElement;
+    this.rd.setStyle(questionModal, 'display', 'block');
+  }
+
+  showInstruction() {
+    var instructionModal = this.instructionModal.nativeElement;
+    this.rd.setStyle(instructionModal, 'display', 'block');
+  }
+
+  closeQuestionModal() {
+    var questionModal = this.questionModal.nativeElement;
+    this.rd.setStyle(questionModal, 'display', 'none');
+  }
+
+  closeInstructionModal() {
+    var instructionModal = this.instructionModal.nativeElement;
+    this.rd.setStyle(instructionModal, 'display', 'none');
   }
 
 }
