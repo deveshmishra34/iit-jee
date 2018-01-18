@@ -41,9 +41,9 @@
           </div>
 
           <div class="subject-section">
-            <ul>
-              <li>phy sec 1</li>
-              <li>phy sec 2</li>
+            <ul *ngIf="sectionObject">
+              <!-- <li *ngFor="let section of sections | objNgFor" (click)="getQuestionOfSection(sections[section])">{{ section }}</li> -->
+              <li *ngFor="let section of sectionObject; let sectionIndex = index" (click)="getQuestionOfSection(sectionIndex)" [ngClass]="{'active': sectionObject[activeSectionIndex]['section_name'] == section['section_name'] }">{{ section['section_name'] }}</li>
             </ul>
           </div>
         </div>
@@ -71,6 +71,10 @@
           </p>
         </div>
         <div class="questions">
+          <div class="questions-text" *ngIf="questions">{{ questions.questions_text }}</div>
+          <div *ngIf="questions" class="show-question">
+            <img [src]="questions.questions_image" alt="question image">
+          </div>
           <button type="button" (click)="fullWidth = !fullWidth">{{ fullWidth? '&gt;' : '&lt;' }}</button>
           <div class="answer-input">
             <input type="text" name="answer">
@@ -97,7 +101,7 @@
         <div class="question-footer">
           <button type="button">Mark for Review &amp; Next</button>
           <button type="button">Clear Response</button>
-          <button type="button" class="save">Save &amp; Next</button>
+          <button type="button" *ngIf="getNextButtonVisibility()" class="save" (click)="getNext()">Save &amp; Next</button>
         </div>
       </div>
 
@@ -126,12 +130,12 @@
         </div>
 
         <div class="subject-question-section">
-          <div class="subject-header">
-            <h4>Phy Sec 1</h4>
+          <div class="subject-header" *ngIf="sectionObject[activeSectionIndex]">
+            <h4>{{ sectionObject[activeSectionIndex]?.section_name }}</h4>
           </div>
           <h4>Choose a question</h4>
-          <div class="question-number">
-            <span>1</span>
+          <div class="question-number" *ngIf="sectionObject[activeSectionIndex]">
+            <span *ngFor="let number of sectionObject[activeSectionIndex].questions; let questionIndex = index" (click)="getQuestion(activeSectionIndex, questionIndex)">{{ number?.question_number }}</span>
           </div>
         </div>
       </div>

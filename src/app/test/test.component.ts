@@ -13,6 +13,11 @@ export class TestComponent implements OnInit {
 
   fullWidth: boolean = true;
   questions: any;
+  sections: any;
+  sectionObject = [];
+  activeSectionIndex = 0;
+  activeQuestionIndex = 0;
+  sectionQuestion: any;
 
   constructor(private rd: Renderer2, private testService: TestService) {
     document.addEventListener('contextmenu', event => event.preventDefault());
@@ -20,10 +25,38 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllQuestions();
+  }
+
+  getAllQuestions() {
+    this.sectionObject = [];
+    this.activeSectionIndex = 0;
+    this.activeQuestionIndex = 0;
     this.testService.getQuestions().subscribe(
-      questions => console.log(questions),  //this.questions = questions,
+      questions => {
+        if (questions && questions.rows) {
+          questions.rows.forEach(element => {
+            let found = false;
+            this.sectionObject.forEach(sec => {
+              if (sec['section_id'] === element['section_id']) {
+                found = true;
+                sec.questions.push(element);
+              }
+            });
+            if (!found) {
+              this.sectionObject.push({
+                section_name: element['section_name'],
+                section_id: element['section_id'],
+                questions: []
+              })
+              this.sectionObject[this.sectionObject.length - 1].questions.push(element);
+            }
+          });
+        }
+        this.getQuestion(this.activeSectionIndex, this.activeQuestionIndex);
+      },
       err => console.log(err)
-    )
+    );
   }
 
   startTimer() {
@@ -68,6 +101,43 @@ export class TestComponent implements OnInit {
   closeInstructionModal() {
     var instructionModal = this.instructionModal.nativeElement;
     this.rd.setStyle(instructionModal, 'display', 'none');
+  }
+
+  getQuestionOfSection(sectionIndex) {
+    this.activeQuestionIndex = 0;
+    this.activeSectionIndex = sectionIndex;
+    this.getQuestion(this.activeSectionIndex, this.activeQuestionIndex);
+    console.log(this.sectionObject[this.activeSectionIndex].questions)
+  }
+
+
+  getQuestion(sectionIndex, questionIndex) {
+    this.testService.getQuestionDetails(this.sectionObject[sectionIndex].questions[questionIndex].questions_id).subscribe(
+      quest => this.questions = quest.rows,
+      err => console.log(err)
+    );
+  }
+
+  getNextButtonVisibility() {
+    if (!((
+      this.sectionObject[this.activeSectionIndex] &&
+      this.sectionObject[this.activeSectionIndex].questions[this.activeQuestionIndex + 1]) || (this.sectionObject[this.activeSectionIndex + 1]))) {
+      return false;
+    }
+    return true;
+  }
+
+  getNext() {
+    if (this.sectionObject[this.activeSectionIndex].questions[this.activeQuestionIndex + 1]) {
+      this.activeQuestionIndex++;
+    } else if (this.sectionObject[this.activeSectionIndex + 1]) {
+      this.activeQuestionIndex = 0;
+      this.activeSectionIndex++;
+    } else {
+      alert('No Next Question to be display');
+      return;
+    }
+    this.getQuestion(this.activeSectionIndex, this.activeQuestionIndex);
   }
 
 }

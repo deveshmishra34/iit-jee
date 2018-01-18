@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstructionsComponent implements OnInit {
 
-  select: any;
+  select: 'english';
   instructionMode: any = "General"  // General & Test
 
   constructor() {

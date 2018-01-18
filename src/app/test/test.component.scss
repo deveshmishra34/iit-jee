@@ -107,6 +107,9 @@ $border-radius: 0.4em;
                                     border-left: 1px solid #000000;
                                 }
                             }
+                            .active {
+                                background-color: #7f87f1;
+                            }
                         }
                     }
                 }
@@ -151,18 +154,29 @@ $border-radius: 0.4em;
                 }
             }
             .questions {
-                background-color: blue;
                 height: 53.5vh;
                 overflow: auto;
                 position: relative;
                 padding: 1em;
+
+                .questions-text {
+                    margin-bottom: 2em;
+                }
+
+                .show-question {
+                    img {
+                        width: 100%;
+                        margin-bottom: 3em;
+                    }
+                }
+
                 button {
                     position: absolute;
                     right: 0;
                     top: 33%;
                     height: 2.6em;
                     background-color: #6d6c6c;
-                    color: #ffffff;
+                    // color: #ffffff;
                     border: 0.1em solid #000000;
                     font-weight: bold;
                     padding: 0.18em;
@@ -188,7 +202,7 @@ $border-radius: 0.4em;
                                 display: inline-block;
                                 border: $border;
                                 border-radius: $border-radius;
-                                color: #ffffff;
+                                color: #000000;
                                 padding: 0.4em;
                                 margin: 0.3em;
                                 font-weight: bolder;
@@ -243,60 +257,86 @@ $border-radius: 0.4em;
                     width: 50%;
                     float: left;
                     line-height: 1.2em;
-                    margin-bottom: 1.5em;
+                    margin-bottom: 1.2em;
+                    p {
+                        padding: 0.3em;
+                        font-size: 0.9em;
+                        float: left;
+                    }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
-                        background-position: -7px -52px;
+                        background-position: -8px -52px;
                         padding: 0.5em 0.8em;
+                        float: left;
                     }
                 }
                 .not-answered {
                     width: 50%;
                     float: left;
                     line-height: 1.2em;
-                    margin-bottom: 1.5em;
+                    margin-bottom: 1.2em;
+                    p {
+                        padding: 0.3em;
+                        font-size: 0.9em;
+                        float: left;
+                    }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
-                        background-position: -40px -52px;
+                        background-position: -43px -52px;
                         padding: 0.5em 0.8em;
+                        float: left;
                     }
                 }
                 .not-visited {
                     width: 50%;
                     float: left;
                     line-height: 1.2em;
-                    margin-bottom: 1.5em;
+                    margin-bottom: 1.2em;
+                    p {
+                        padding: 0.3em;
+                        font-size: 0.9em;
+                        float: left;
+                    }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
-                        background-position: -105px -52px;
-                        padding: 0.5em 0.8em;
+                        background-position: -106px -52px;
+                        padding: 0.5em 0.9em;
+                        float: left;
                     }
                 }
                 .review {
                     width: 50%;
                     float: left;
                     line-height: 1.2em;
-                    margin-bottom: 1.5em;
+                    margin-bottom: 1.2em;
+                    p {
+                        padding: 0.3em;
+                        font-size: 0.9em;
+                        float: left;
+                    }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
                         background-position: -75px -52px;
-                        padding: 0.5em 0.8em;
+                        padding: 0.5em 0.85em;
+                        float: left;
                     }
                 }
                 .answered-review {
                     clear: both;
                     width: 100%;
                     line-height: 1.2em;
-                    margin-bottom: 1.5em;
+                    margin-bottom: 1.2em;
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
                         background-position: -9px -85px;
+                        vertical-align: baseline;
                         padding: 0.5em 0.8em;
                         display: inline-block;
                     }
                 }
             }
             .subject-question-section {
+                clear: both;
                 .subject-header {
                     background-color: #525cec;
                     padding: 0.4em;
@@ -308,6 +348,9 @@ $border-radius: 0.4em;
                 }
                 .question-number {
                     padding: 2.2em 1.3em;
+                    white-space: normal;
+                    height: 25.5vh;
+                    overflow: auto;
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat 0 0 transparent;
                         background-position: -157px -6px;
@@ -315,6 +358,7 @@ $border-radius: 0.4em;
                         height: 43px;
                         padding: 1em 1.3em;
                         cursor: pointer;
+                        float: left;
                     }
                 }
             }
