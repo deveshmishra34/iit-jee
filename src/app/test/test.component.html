@@ -15,7 +15,7 @@
     <div class="modal" #instructionModal>
       <div class="modal-content">
         <span id="" (click)="closeInstructionModal()">&times;</span>
-        <pp-test-instructions></pp-test-instructions>
+        <pp-test-instructions [language]="select"></pp-test-instructions>
       </div>
     </div>
   </div>
@@ -64,38 +64,29 @@
       <div [ngClass]="{'main-question-screen': fullWidth, 'full-width': !fullWidth}">
         <div class="language-selection">
           <p>View in:
-            <select>
+            <select [(ngModel)]="select">
               <option value="english">English</option>
               <option value="hindi">Hindi</option>
             </select>
           </p>
         </div>
-        <div class="questions">
+        <div class="questions" #scroll>
+          <img src="../../assets/images/Down.png" alt="down" (click)="scrollToBottom()">
           <div class="questions-text" *ngIf="questions">{{ questions.questions_text }}</div>
           <div *ngIf="questions" class="show-question">
             <img [src]="questions.questions_image" alt="question image">
           </div>
           <button type="button" (click)="fullWidth = !fullWidth">{{ fullWidth? '&gt;' : '&lt;' }}</button>
           <div class="answer-input">
-            <input type="text" name="answer">
+            <input type="text" name="answer" [(ngModel)]="expectedAnswer">
             <div class="num-buttons">
               <ul>
                 <li>BackSpace</li>
-                <li>9</li>
-                <li>8</li>
-                <li>7</li>
-                <li>6</li>
-                <li>5</li>
-                <li>4</li>
-                <li>3</li>
-                <li>2</li>
-                <li>1</li>
-                <li>0</li>
-                <li>.</li>
-                <li>-</li>
+                <li *ngFor="let num of nums" (click)="getNums(num)">{{ num }}</li>
               </ul>
             </div>
           </div>
+          <img src="../../assets/images/Up.png" alt="down" (click)="scrollToTop()">
         </div>
 
         <div class="question-footer">

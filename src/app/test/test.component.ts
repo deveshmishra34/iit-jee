@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ElementRef, Renderer2 } from '@angular/core';
 import { TestService } from "../services/test.service";
 
 @Component({
@@ -8,8 +8,10 @@ import { TestService } from "../services/test.service";
 })
 export class TestComponent implements OnInit {
 
+  select: string = "english";
   @ViewChild('questionModal') questionModal: ElementRef;
   @ViewChild('instructionModal') instructionModal: ElementRef;
+  @ViewChild('scroll') scroll: ElementRef;
 
   fullWidth: boolean = true;
   questions: any;
@@ -18,6 +20,8 @@ export class TestComponent implements OnInit {
   activeSectionIndex = 0;
   activeQuestionIndex = 0;
   sectionQuestion: any;
+  nums: string[] = ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0", ".", "-"];
+  expectedAnswer: string = '';
 
   constructor(private rd: Renderer2, private testService: TestService) {
     document.addEventListener('contextmenu', event => event.preventDefault());
@@ -28,41 +32,10 @@ export class TestComponent implements OnInit {
     this.getAllQuestions();
   }
 
-  getAllQuestions() {
-    this.sectionObject = [];
-    this.activeSectionIndex = 0;
-    this.activeQuestionIndex = 0;
-    this.testService.getQuestions().subscribe(
-      questions => {
-        if (questions && questions.rows) {
-          questions.rows.forEach(element => {
-            let found = false;
-            this.sectionObject.forEach(sec => {
-              if (sec['section_id'] === element['section_id']) {
-                found = true;
-                sec.questions.push(element);
-              }
-            });
-            if (!found) {
-              this.sectionObject.push({
-                section_name: element['section_name'],
-                section_id: element['section_id'],
-                questions: []
-              })
-              this.sectionObject[this.sectionObject.length - 1].questions.push(element);
-            }
-          });
-        }
-        this.getQuestion(this.activeSectionIndex, this.activeQuestionIndex);
-      },
-      err => console.log(err)
-    );
-  }
-
   startTimer() {
     // set starting date
     var startDate = new Date();
-    var twoHrsLater = new Date(startDate.getTime() + (2 * 1000 * 60 * 60));
+    var twoHrsLater = new Date(startDate.getTime() + (3 * 1000 * 60 * 60));
 
     var x = setInterval(function () {
 
@@ -101,6 +74,57 @@ export class TestComponent implements OnInit {
   closeInstructionModal() {
     var instructionModal = this.instructionModal.nativeElement;
     this.rd.setStyle(instructionModal, 'display', 'none');
+  }
+
+  scrollToBottom() {
+    this.scroll.nativeElement.scrollTo({
+      top: this.scroll.nativeElement.scrollHeight,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  scrollToTop() {
+    this.scroll.nativeElement.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  getNums(val) {
+    this.expectedAnswer += val;
+  }
+
+  getAllQuestions() {
+    this.sectionObject = [];
+    this.activeSectionIndex = 0;
+    this.activeQuestionIndex = 0;
+    this.testService.getQuestions().subscribe(
+      questions => {
+        if (questions && questions.rows) {
+          questions.rows.forEach(element => {
+            let found = false;
+            this.sectionObject.forEach(sec => {
+              if (sec['section_id'] === element['section_id']) {
+                found = true;
+                sec.questions.push(element);
+              }
+            });
+            if (!found) {
+              this.sectionObject.push({
+                section_name: element['section_name'],
+                section_id: element['section_id'],
+                questions: []
+              })
+              this.sectionObject[this.sectionObject.length - 1].questions.push(element);
+            }
+          });
+        }
+        this.getQuestion(this.activeSectionIndex, this.activeQuestionIndex);
+      },
+      err => console.log(err)
+    );
   }
 
   getQuestionOfSection(sectionIndex) {
