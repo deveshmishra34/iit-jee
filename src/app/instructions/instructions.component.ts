@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstructionsComponent implements OnInit {
 
-  select: 'english';
-  isActive: boolean = false;
-  instructionMode: any = "General"  // General & Test
+  select = 'english';
+  isActive = false;
+  instructionMode = "General"  // General & Test
 
   constructor() {
     this.select = "english";

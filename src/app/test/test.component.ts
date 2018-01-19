@@ -12,7 +12,8 @@ export class TestComponent implements OnInit {
   @ViewChild('questionModal') questionModal: ElementRef;
   @ViewChild('instructionModal') instructionModal: ElementRef;
   @ViewChild('scroll') scroll: ElementRef;
-
+  @ViewChild('answer') answer: ElementRef;
+  currentCursorPosition = 0;
   fullWidth: boolean = true;
   questions: any;
   sections: any;
@@ -34,18 +35,19 @@ export class TestComponent implements OnInit {
 
   startTimer() {
     // set starting date
-    var startDate = new Date();
-    var twoHrsLater = new Date(startDate.getTime() + (3 * 1000 * 60 * 60));
+    let startDate = new Date();
+    let twoHrsLater = new Date(startDate.getTime() + (3 * 1000 * 60 * 60));
+    let self = this;
+    let x = setInterval(function () {
 
-    var x = setInterval(function () {
-
-      var now = new Date().getTime();
-      var distance = <any>twoHrsLater - now;
-
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
+      let now = new Date().getTime();
+      let distance = <any>twoHrsLater - now;
+      if (self.sectionObject && self.sectionObject[self.activeSectionIndex] && self.sectionObject[self.activeSectionIndex].questions[self.activeQuestionIndex]) {
+        self.sectionObject[self.activeSectionIndex].questions[self.activeQuestionIndex].time_taken++;
+      }
+      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
       document.getElementById("timer").innerHTML = "<strong>Time Left :" + hours + "h "
         + minutes + "m " + seconds + "s </strong>";
 
@@ -57,22 +59,22 @@ export class TestComponent implements OnInit {
   }
 
   showPaper() {
-    var questionModal = this.questionModal.nativeElement;
+    let questionModal = this.questionModal.nativeElement;
     this.rd.setStyle(questionModal, 'display', 'block');
   }
 
   showInstruction() {
-    var instructionModal = this.instructionModal.nativeElement;
+    let instructionModal = this.instructionModal.nativeElement;
     this.rd.setStyle(instructionModal, 'display', 'block');
   }
 
   closeQuestionModal() {
-    var questionModal = this.questionModal.nativeElement;
+    let questionModal = this.questionModal.nativeElement;
     this.rd.setStyle(questionModal, 'display', 'none');
   }
 
   closeInstructionModal() {
-    var instructionModal = this.instructionModal.nativeElement;
+    let instructionModal = this.instructionModal.nativeElement;
     this.rd.setStyle(instructionModal, 'display', 'none');
   }
 
@@ -93,7 +95,56 @@ export class TestComponent implements OnInit {
   }
 
   getNums(val) {
-    this.expectedAnswer += val;
+    let tempValue = [];
+    if (!this.expectedAnswer) {
+      this.expectedAnswer = val;
+      this.currentCursorPosition = 1;
+      setTimeout(() => {
+        this.setSelectionRange(this.answer.nativeElement, this.currentCursorPosition, this.currentCursorPosition);
+      }, 10);
+    } else {
+      tempValue = this.expectedAnswer.split('');
+      tempValue = Object.assign(tempValue, tempValue.splice(this.currentCursorPosition, 0, val));
+      this.expectedAnswer = tempValue.join('');
+      setTimeout(() => {
+        let textBox = this.answer.nativeElement;
+        this.currentCursorPosition++;
+        this.setSelectionRange(this.answer.nativeElement, this.currentCursorPosition, this.currentCursorPosition);
+      }, 10);
+    }
+  }
+
+  removeCharacter() {
+
+  }
+
+  clear() {
+    this.expectedAnswer = "";
+  }
+
+  goLeft() {
+    this.currentCursorPosition = Math.max(0, this.currentCursorPosition - 1);
+    this.setSelectionRange(this.answer.nativeElement, this.currentCursorPosition, this.currentCursorPosition);
+  }
+
+  goRight() {
+    this.currentCursorPosition = Math.min(this.expectedAnswer.length, this.currentCursorPosition + 1);
+    this.setSelectionRange(this.answer.nativeElement, this.currentCursorPosition, this.currentCursorPosition);
+  }
+
+  setSelectionRange(input, selectionStart, selectionEnd) {
+    if (input.setSelectionRange) {
+      input.focus();
+      input.setSelectionRange(selectionStart, selectionEnd);
+    } else if (input.createTextRange) {
+      var range = input.createTextRange();
+      range.collapse(true);
+      range.moveEnd('character', selectionEnd);
+      range.moveStart('character', selectionStart);
+      range.select();
+    } else {
+      console.log("Unable to change position");
+    }
   }
 
   getAllQuestions() {
@@ -104,6 +155,7 @@ export class TestComponent implements OnInit {
       questions => {
         if (questions && questions.rows) {
           questions.rows.forEach(element => {
+            element.time_taken = 0;
             let found = false;
             this.sectionObject.forEach(sec => {
               if (sec['section_id'] === element['section_id']) {
@@ -131,7 +183,6 @@ export class TestComponent implements OnInit {
     this.activeQuestionIndex = 0;
     this.activeSectionIndex = sectionIndex;
     this.getQuestion(this.activeSectionIndex, this.activeQuestionIndex);
-    console.log(this.sectionObject[this.activeSectionIndex].questions)
   }
 
 

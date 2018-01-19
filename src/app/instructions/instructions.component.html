@@ -19,10 +19,10 @@
 
       <div class="main-instructions" [ngSwitch]="instructionMode">
         <div class="instruction-content" *ngSwitchCase="'General'">
-          <h2 *ngIf="select == 'english'">Important Notes</h2>
-          <h2 *ngIf="select == 'hindi'">महत्वपूर्ण लेख</h2>
+          <h2 *ngIf="select === 'english'">Important Notes</h2>
+          <h2 *ngIf="select === 'hindi'">महत्वपूर्ण लेख</h2>
           <div class="instructions">
-            <ul *ngIf="select == 'english'">
+            <ul *ngIf="select === 'english'">
               <li>The purpose of this MOCK TEST is to familiarize the candidates with the Computer Based Test (CBT) environment
                 of the JEE (Advanced) – 2018.</li>
               <li>Candidates may use this MOCK TEST to get acclimatized with the functionalities of CBT.</li>
@@ -30,7 +30,7 @@
               <li>The type of questions and illustrative marking scheme in this MOCK TEST is in NO WAY INDICATIVE of the type
                 of questions and marking scheme of JEE (Advanced) – 2018 question paper.</li>
             </ul>
-            <ul *ngIf="select == 'hindi'">
+            <ul *ngIf="select === 'hindi'">
               <li>इस मॉक टेस्ट का उद्देश्य जेईई (एडवांस्ड) - 2018 के कंप्यूटर आधारित टेस्ट (सीबीटी) पर्यावरण के साथ उम्मीदवारों को परिचित करना है।</li>
               <li>सीबीटी की क्रियाकलापों के साथ अनुकूलन पाने के लिए उम्मीदवार इस मॉक टेस्ट का उपयोग कर सकते हैं।</li>
               <li>इस मॉक टेस्ट ने जेईई (एडवांस) के पिछले साल के सवालों का इस्तेमाल किया है।</li>
@@ -46,8 +46,8 @@
     </div>
 
     <div class="instruction-footer">
-      <button type="button" *ngIf="instructionMode == 'General'" (click)="toggleMode()">Next</button>
-      <div class="condition" *ngIf="instructionMode== 'Test'">
+      <button type="button" *ngIf="instructionMode === 'General'" (click)="toggleMode()">Next</button>
+      <div class="condition" *ngIf="instructionMode=== 'Test'">
         <p class="condition-para">Choose your default language:
           <select>
             <option value="english">English</option>
@@ -55,26 +55,26 @@
           </select>
         </p>
         <p class="condition-para">
-          <small *ngIf="select == 'english'">Please note all the question will appear in default language. The language can be changed for the particular question
+          <small *ngIf="select === 'english'">Please note all the question will appear in default language. The language can be changed for the particular question
             later on.</small>
-            <small *ngIf="select == 'hindi'">कृपया ध्यान दें कि सभी प्रश्न डिफ़ॉल्ट भाषा में दिखाई देंगे। भाषा को बाद में विशेष प्रश्न के लिए बदल दिया जा सकता है।</small>
+            <small *ngIf="select === 'hindi'">कृपया ध्यान दें कि सभी प्रश्न डिफ़ॉल्ट भाषा में दिखाई देंगे। भाषा को बाद में विशेष प्रश्न के लिए बदल दिया जा सकता है।</small>
         </p>
         <input type="checkbox" name="condition" [(ngModel)]="isActive"> &nbsp;
-        <small *ngIf="select == 'english'">I have read and understood the instructions. All computer hardware alloted to me are in good condition. I declare
+        <small *ngIf="select === 'english'">I have read and understood the instructions. All computer hardware alloted to me are in good condition. I declare
           that I am not in a possession of / not wearing / not carrying any prohibited gadget like Mobile phone, bluetooth
           devices etc. / any prohibited material with me into the examination hall. I agree that in case of not adhering
           to the instructions. I shall be liable to be debarred from this Test and/or to disciplinary action, which may include
           ban from the future Tests / Examinations</small>
-          <small *ngIf="select == 'hindi'">मैंने निर्देश पढ़ लिया है और समझ लिया है। सभी कंप्यूटर हार्डवेयर मुझे आवंटित अच्छी स्थिति में हैं। मैं घोषणा करता / करती हूं कि मैं मोबाइल फोन, ब्लूटूथ डिवाइस आदि जैसे कोई निषिद्ध गैजेट नहीं पहने / परिधान में नहीं हूं / परीक्षा कक्ष में मेरे साथ कोई प्रतिबंधित सामग्री नहीं है। मैं सहमत हूं कि निर्देशों का पालन नहीं करने के मामले में। मुझे इस टेस्ट और / या अनुशासनिक कार्रवाई से बहिष्कृत करने के लिए उत्तरदायी होगा, जिसमें भविष्य की परीक्षा / परीक्षा से प्रतिबंध शामिल हो सकता है</small>
+          <small *ngIf="select === 'hindi'">मैंने निर्देश पढ़ लिया है और समझ लिया है। सभी कंप्यूटर हार्डवेयर मुझे आवंटित अच्छी स्थिति में हैं। मैं घोषणा करता / करती हूं कि मैं मोबाइल फोन, ब्लूटूथ डिवाइस आदि जैसे कोई निषिद्ध गैजेट नहीं पहने / परिधान में नहीं हूं / परीक्षा कक्ष में मेरे साथ कोई प्रतिबंधित सामग्री नहीं है। मैं सहमत हूं कि निर्देशों का पालन नहीं करने के मामले में। मुझे इस टेस्ट और / या अनुशासनिक कार्रवाई से बहिष्कृत करने के लिए उत्तरदायी होगा, जिसमें भविष्य की परीक्षा / परीक्षा से प्रतिबंध शामिल हो सकता है</small>
       </div>
-      <button type="button" class="prev" *ngIf="instructionMode == 'Test'" (click)="toggleMode()">Previous</button>
-      <button type="button" class="go" *ngIf="instructionMode == 'Test'" [disabled]="!isActive" (click)="newTab()">I am ready to begin</button>
+      <button type="button" class="prev" *ngIf="instructionMode === 'Test'" (click)="toggleMode()">Previous</button>
+      <button type="button" class="go" *ngIf="instructionMode === 'Test'" [disabled]="!isActive" (click)="newTab()">I am ready to begin</button>
     </div>
   </div>
 
   <div class="user-profile-section ">
     <img src="../assets/images/admin-icon.png" alt="user image">
-    <h2 *ngIf="select == 'english'">Student Name</h2>
-    <h2 *ngIf="select == 'hindi'">छात्र का नाम</h2>
+    <h2 *ngIf="select === 'english'">Student Name</h2>
+    <h2 *ngIf="select === 'hindi'">छात्र का नाम</h2>
   </div>
 </div>

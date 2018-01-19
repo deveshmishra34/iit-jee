@@ -78,11 +78,14 @@
           </div>
           <button type="button" (click)="fullWidth = !fullWidth">{{ fullWidth? '&gt;' : '&lt;' }}</button>
           <div class="answer-input">
-            <input type="text" name="answer" [(ngModel)]="expectedAnswer">
+            <input type="text" name="answer" [(ngModel)]="expectedAnswer" #answer autofocus>
             <div class="num-buttons">
               <ul>
-                <li>BackSpace</li>
+                <li (click)="removeCharacter()">BackSpace</li>
                 <li *ngFor="let num of nums" (click)="getNums(num)">{{ num }}</li>
+                <li (click)="goLeft()">&lt;-</li>
+                <li (click)="goRight()">-&gt;</li>
+                <li (click)="clear()">Clear All</li>
               </ul>
             </div>
           </div>
@@ -99,24 +102,24 @@
       <div [ngClass]="{'question-status': fullWidth, 'hide-status': !fullWidth }">
         <div class="status-info">
           <div class="answered">
-            <p>
-              <span> 0</span> &nbsp;&nbsp;Answered</p>
+            <span>0</span>
+            <p>Answered</p>
           </div>
           <div class="not-answered">
-            <p>
-              <span> 7</span> &nbsp;&nbsp;Not Answered</p>
+            <span>0</span>
+            <p>Not answered</p>
           </div>
           <div class="not-visited">
-            <p>
-              <span> 0</span> &nbsp;&nbsp;Not Visited</p>
+            <span>0</span>
+            <p>Not visited</p>
           </div>
           <div class="review">
-            <p>
-              <span> 0</span> &nbsp;&nbsp;Review Later</p>
+            <span>0</span>
+            <p>Review later</p>
           </div>
           <div class="answered-review">
-            <p>
-              <span>0</span> &nbsp;&nbsp;Answered &amp; marked for Review Later (will be considered for evaluation)</p>
+            <span>0</span>
+            <p> &nbsp;&nbsp;Answered &amp; marked for Review Later (will be considered for evaluation)</p>
           </div>
         </div>
 
