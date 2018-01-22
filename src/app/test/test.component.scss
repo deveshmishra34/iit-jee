@@ -243,6 +243,13 @@ $border-radius: 0.4em;
                     background-color: #525cec;
                     color: #ffffff;
                     border: none;
+                    margin-right: 4em;
+                }
+                button.submit {
+                    float: right;
+                    background-color: #525cec;
+                    color: #ffffff;
+                    border: none;
                 }
             }
             .question-status {
@@ -267,6 +274,8 @@ $border-radius: 0.4em;
                     p {
                         font-size: 0.9em;
                         margin-top: 0.5em;
+                        text-align: left;
+                        text-indent: 0.5em;
                     }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
@@ -283,6 +292,8 @@ $border-radius: 0.4em;
                     p {
                         font-size: 0.9em;
                         margin-top: 0.5em;
+                        text-align: left;
+                        text-indent: 0.5em;
                     }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
@@ -299,6 +310,8 @@ $border-radius: 0.4em;
                     p {
                         font-size: 0.9em;
                         margin-top: 0.5em;
+                        text-align: left;
+                        text-indent: 0.5em;
                     }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
@@ -315,6 +328,8 @@ $border-radius: 0.4em;
                     p {
                         font-size: 0.9em;
                         margin-top: 0.5em;
+                        text-align: left;
+                        text-indent: 0.5em;
                     }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
@@ -329,11 +344,12 @@ $border-radius: 0.4em;
                     line-height: 1.2em;
                     margin-bottom: 1.2em;
                     span {
+                        float: left;
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
                         background-position: -9px -85px;
                         vertical-align: baseline;
                         padding: 0.5em 0.8em;
-                        display: inline-block;
+                        // display: inline-block;
                     }
                 }
             }
@@ -349,18 +365,26 @@ $border-radius: 0.4em;
                     }
                 }
                 .question-number {
-                    padding: 2.2em 1.3em;
+                    padding: 2em 1em;
                     white-space: normal;
-                    height: 25.5vh;
+                    height: 28vh;
                     overflow: auto;
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat 0 0 transparent;
                         background-position: -157px -6px;
                         width: 49px;
                         height: 43px;
-                        padding: 1em 1.3em;
+                        padding: 0.8em 1.15em;
                         cursor: pointer;
                         float: left;
+                    }
+                }
+                .submit {
+                    button {
+                        float: right;
+                        background-color: #525cec;
+                        color: #ffffff;
+                        border: none;
                     }
                 }
             }

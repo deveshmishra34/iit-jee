@@ -94,7 +94,8 @@
 
         <div class="question-footer">
           <button type="button">Mark for Review &amp; Next</button>
-          <button type="button">Clear Response</button>
+          <button type="button" (click)="clear()">Clear Response</button>
+          <button type="button" class="submit" (click)="submit()">Submit</button>
           <button type="button" *ngIf="getNextButtonVisibility()" class="save" (click)="getNext()">Save &amp; Next</button>
         </div>
       </div>
