@@ -275,7 +275,6 @@ $border-radius: 0.4em;
                         font-size: 0.9em;
                         margin-top: 0.5em;
                         text-align: left;
-                        text-indent: 0.5em;
                     }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
@@ -307,6 +306,7 @@ $border-radius: 0.4em;
                     float: left;
                     line-height: 1.2em;
                     margin-bottom: 1.2em;
+                    clear: both;
                     p {
                         font-size: 0.9em;
                         margin-top: 0.5em;
@@ -355,6 +355,8 @@ $border-radius: 0.4em;
             }
             .subject-question-section {
                 clear: both;
+                height: 31vh;
+                overflow: hidden;
                 .subject-header {
                     background-color: #525cec;
                     padding: 0.4em;
@@ -372,9 +374,10 @@ $border-radius: 0.4em;
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat 0 0 transparent;
                         background-position: -157px -6px;
-                        width: 49px;
-                        height: 43px;
+                        width: 37px;
+                        height: 41px;
                         padding: 0.8em 1.15em;
+                        margin: 0.2em;
                         cursor: pointer;
                         float: left;
                     }
