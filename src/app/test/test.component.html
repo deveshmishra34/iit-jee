@@ -40,6 +40,7 @@
             <span id="timer"></span>
           </div>
 
+
           <div class="subject-section">
             <ul *ngIf="sectionObject">
               <!-- <li *ngFor="let section of sections | objNgFor" (click)="getQuestionOfSection(sections[section])">{{ section }}</li> -->
@@ -70,14 +71,14 @@
             </select>
           </p>
         </div>
-        <div class="questions" #scroll>
+        <div class="questions" #scroll *ngIf="questions">
           <img src="../../assets/images/Down.png" alt="down" (click)="scrollToBottom()">
-          <div class="questions-text" *ngIf="questions">{{ questions.questions_text }}</div>
+          <div class="questions-text" >{{ questions.questions_text }}</div>
           <div *ngIf="questions" class="show-question">
             <img [src]="questions.questions_image" alt="question image">
           </div>
           <button type="button" (click)="fullWidth = !fullWidth">{{ fullWidth? '&gt;' : '&lt;' }}</button>
-          <div class="answer-input">
+          <div class="answer-input" *ngIf="questions.questions_type === 'numeric'">
             <input type="text" name="answer" [(ngModel)]="expectedAnswer" #answer autofocus>
             <div class="num-buttons">
               <ul>
@@ -93,7 +94,7 @@
         </div>
 
         <div class="question-footer">
-          <button type="button">Mark for Review &amp; Next</button>
+          <button type="button" (click)="markForReview()">Mark for Review &amp; Next</button>
           <button type="button" (click)="clear()">Clear Response</button>
           <button type="button" class="submit">Submit</button>
           <button type="button" *ngIf="getNextButtonVisibility()" class="save" (click)="getNext()">Save &amp; Next</button>
@@ -103,23 +104,23 @@
       <div [ngClass]="{'question-status': fullWidth, 'hide-status': !fullWidth }">
         <div class="status-info">
           <div class="answered">
-            <span>0</span>
+            <span>{{sectionObject[activeSectionIndex]? sectionObject[activeSectionIndex].attempted: 0}}</span>
             <p>Answered</p>
           </div>
           <div class="not-answered">
-            <span>0</span>
+            <span>{{sectionObject[activeSectionIndex]? sectionObject[activeSectionIndex].not_answered: 0}}</span>
             <p>Not answered</p>
           </div>
           <div class="not-visited">
-            <span>0</span>
+            <span>{{sectionObject[activeSectionIndex]? sectionObject[activeSectionIndex].not_visited: 0}}</span>
             <p>Not visited</p>
           </div>
           <div class="review">
-            <span>0</span>
+            <span>{{sectionObject[activeSectionIndex]? sectionObject[activeSectionIndex].review_later: 0}}</span>
             <p>Review later</p>
           </div>
           <div class="answered-review">
-            <span>0</span>
+            <span>{{sectionObject[activeSectionIndex]? sectionObject[activeSectionIndex].answered_marked : 0}}</span>
             <p> &nbsp;&nbsp;Answered &amp; marked for Review Later (will be considered for evaluation)</p>
           </div>
         </div>

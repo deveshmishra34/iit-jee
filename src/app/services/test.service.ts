@@ -21,4 +21,9 @@ export class TestService {
             .map(res => res.json());
     }
 
+    postAnswer(data) {
+        return this.http.post(this.baseUrl + '/postActivityDuringTestUser', data)
+            .map((res) => res.json());
+    }
+
 }
