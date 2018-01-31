@@ -2,7 +2,7 @@
     min-height: 100%;
     width: 100%;
     .title-bar {
-        background-color: #525cec;
+        background-color: #2D70B6;
         color: #ffffff;
         padding: 1em;
     }
@@ -81,6 +81,11 @@
                 border: 0.1em solid #cccccc;
                 cursor: pointer;
             }
+            button:hover{
+                background-color: #2D70B6 !important;
+                color: #ffffff;
+                border: none;
+            }
             .prev {
                 float: left;
             }
@@ -107,5 +112,12 @@
         img {
             width: 45%;
         }
+    }
+    .forActiveButton{
+        background-color: #2D70B6 !important;
+        color: #ffffff;
+        border: none;
+        // padding: 10px 20px;
+        // margin: 19px 15px 0px 0px;
     }
 }

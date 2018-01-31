@@ -68,7 +68,7 @@
           <small *ngIf="select === 'hindi'">मैंने निर्देश पढ़ लिया है और समझ लिया है। सभी कंप्यूटर हार्डवेयर मुझे आवंटित अच्छी स्थिति में हैं। मैं घोषणा करता / करती हूं कि मैं मोबाइल फोन, ब्लूटूथ डिवाइस आदि जैसे कोई निषिद्ध गैजेट नहीं पहने / परिधान में नहीं हूं / परीक्षा कक्ष में मेरे साथ कोई प्रतिबंधित सामग्री नहीं है। मैं सहमत हूं कि निर्देशों का पालन नहीं करने के मामले में। मुझे इस टेस्ट और / या अनुशासनिक कार्रवाई से बहिष्कृत करने के लिए उत्तरदायी होगा, जिसमें भविष्य की परीक्षा / परीक्षा से प्रतिबंध शामिल हो सकता है</small>
       </div>
       <button type="button" class="prev" *ngIf="instructionMode === 'Test'" (click)="toggleMode()">Previous</button>
-      <button type="button" class="go" *ngIf="instructionMode === 'Test'" [disabled]="!isActive" (click)="newTab()">I am ready to begin</button>
+      <button type="button" class="go" *ngIf="instructionMode === 'Test'" [disabled]="!isActive" [ngClass]="{'forActiveButton': isActive}" (click)="newTab()">I am ready to begin</button>
     </div>
   </div>
 

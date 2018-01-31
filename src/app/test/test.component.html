@@ -78,6 +78,22 @@
             <img [src]="questions.questions_image" alt="question image">
           </div>
           <button type="button" (click)="fullWidth = !fullWidth">{{ fullWidth? '&gt;' : '&lt;' }}</button>
+          <!-- For single type question -->
+          <div class="for-single" *ngIf="questions.questions_type === 'single' && questions.options">
+            <div *ngFor="let option of questions.options; let i = index">
+              <input type="radio" name="user_answer" (change)="singleSelectValue($event)" value='{{i+1}}' id="single_{{i+1}}"> {{option.text}}
+            </div>
+          </div>
+
+
+          <!-- For multiple type question -->
+          <div class="for-multiple" *ngIf="questions.questions_type === 'multiple' && questions.options">
+            <div *ngFor="let option of questions.options; let i = index">
+              <input type="checkbox" name="user_answer" (change)="multipleSelectValue($event)" value='{{i+1}}' id="multiple_{{i+1}}"> {{option.text}}
+            </div>
+          </div>
+
+          <!-- Numeric keypad will show only when question is numeric type -->
           <div class="answer-input" *ngIf="questions.questions_type === 'numeric'">
             <input type="text" name="answer" [(ngModel)]="expectedAnswer" #answer autofocus>
             <div class="num-buttons">
@@ -96,7 +112,7 @@
         <div class="question-footer">
           <button type="button" (click)="markForReview()">Mark for Review &amp; Next</button>
           <button type="button" (click)="clear()">Clear Response</button>
-          <button type="button" class="submit">Submit</button>
+          
           <button type="button" *ngIf="getNextButtonVisibility()" class="save" (click)="getNext()">Save &amp; Next</button>
         </div>
       </div>
@@ -131,10 +147,15 @@
           </div>
           <h4>Choose a question</h4>
           <div class="question-number" *ngIf="sectionObject[activeSectionIndex]">
-            <span *ngFor="let number of sectionObject[activeSectionIndex].questions; let questionIndex = index" (click)="getQuestion(activeSectionIndex, questionIndex)">{{ number?.question_number }}</span>
+            <span *ngFor="let number of sectionObject[activeSectionIndex].questions; let questionIndex = index" (click)="getQuestion(activeSectionIndex, questionIndex, $event)" id="ques_{{number.question_number}}" class="{{getQuestionClass(questionIndex)}}" >{{  questionIndex + 1 }}</span>
           </div>
+        </div>
+        <div>
+          <button type="button" class="submit" (click)="submit()">Submit</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- [ngClass]="{(getQuestionClass(questionIndex) ? getQuestionClass(questionIndex) : 'not-visited'): true}" -->

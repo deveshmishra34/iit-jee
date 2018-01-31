@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, Input, ElementRef, Renderer2 } from '@angular/core';
 import { TestService } from "../services/test.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pp-test',
@@ -27,7 +28,13 @@ export class TestComponent implements OnInit {
     sectionObject : []
   };
 
-  constructor(private rd: Renderer2, private testService: TestService) {
+  multipleAnswerArray = [];
+
+  constructor(
+    private rd: Renderer2, 
+    private testService: TestService,
+    private routes : Router
+  ) {
     document.addEventListener('contextmenu', event => event.preventDefault());
     this.startTimer();
   }
@@ -57,6 +64,7 @@ export class TestComponent implements OnInit {
       if (distance < 0) {
         clearInterval(x);
         // todo when the time is over
+        this.routes.navigate(['/submit']);
       }
     }, 1000);
   }
@@ -98,7 +106,7 @@ export class TestComponent implements OnInit {
   }
 
   getNums(val) {
-    debugger;
+    // debugger;
     let tempValue = [];
     if (!this.expectedAnswer) {
       this.expectedAnswer = val;
@@ -119,28 +127,54 @@ export class TestComponent implements OnInit {
   }
 
   removeCharacter() {
-
+    if(this.expectedAnswer.length > 0){
+      this.expectedAnswer = this.expectedAnswer.substring(0, this.expectedAnswer.length - 1);
+    }
+    
   }
 
   clear() {
     // debugger;
-    this.expectedAnswer = "";
+    var type = this.questions.questions_type;
+    
+    switch(type){
+      case 'numeric' : 
+        this.expectedAnswer = "";
+      break;
+      case 'single' :
+        this.expectedAnswer = "";
+        for(let i=1; i<=4; i++){
+          var ele = document.getElementById('single_'+i);
+          ele['checked'] = false;
+        }
+      break;
+      case 'multiple' :
+        this.expectedAnswer = "";
+        for (let i = 1; i <= 4; i++) {
+          var ele = document.getElementById('multiple_' + i);
+          ele['checked'] = false;
+        }
+        this.multipleAnswerArray = [];
+      break;
+      default : alert("Not a known type");
+    }
+    
   }
 
   goLeft() {
-    debugger;
+    // debugger;
     this.currentCursorPosition = Math.max(0, this.currentCursorPosition - 1);
     this.setSelectionRange(this.answer.nativeElement, this.currentCursorPosition, this.currentCursorPosition);
   }
 
   goRight() {
-    debugger;
+    // debugger;
     this.currentCursorPosition = Math.min(this.expectedAnswer.length, this.currentCursorPosition + 1);
     this.setSelectionRange(this.answer.nativeElement, this.currentCursorPosition, this.currentCursorPosition);
   }
 
   setSelectionRange(input, selectionStart, selectionEnd) {
-    debugger;
+    // debugger;
     if (input.setSelectionRange) {
       input.focus();
       input.setSelectionRange(selectionStart, selectionEnd);
@@ -166,6 +200,7 @@ export class TestComponent implements OnInit {
         if (questions && questions.rows) {
           questions.rows.forEach(element => {
             element.time_taken = 0;
+            element.answerStatus = 'not-visited';
             let found = false;
             this.sectionObject.forEach(sec => {
               if (sec['section_id'] === element['section_id']) {
@@ -178,8 +213,8 @@ export class TestComponent implements OnInit {
                 section_name: element['section_name'],
                 section_id: element['section_id'],
                 attempted: 0,
-                not_answered: 0,
                 not_visited: 0,
+                not_answered: 0,
                 review_later: 0,
                 answered_marked: 0,
 
@@ -219,11 +254,20 @@ export class TestComponent implements OnInit {
   }
 
 
-  getQuestion(sectionIndex, questionIndex) {
+  getQuestion(sectionIndex, questionIndex, input?:any) {
+
+    this.activeQuestionIndex = questionIndex;
+    this.expectedAnswer = "";
+    
+    if(input){
+      var ele = document.getElementById(input.target.id);
+    }
+
     this.testService.getQuestionDetails(this.sectionObject[sectionIndex].questions[questionIndex].questions_id).subscribe(
       quest => {
         this.questions = quest.rows;
         this.questions.answerStatus = "";
+        this.sectionObject[sectionIndex].questions[questionIndex].answerStatus = quest.rows.attempt_status || 'not-answered'; 
       },
       err => console.log(err)
     );
@@ -244,16 +288,18 @@ export class TestComponent implements OnInit {
     // check for question status and update it 
     if(this.expectedAnswer){
       this.questions.answerStatus = "answered";
-      console.log(this.expectedAnswer);
+      this.sectionObject[this.activeSectionIndex].questions[this.activeQuestionIndex].answerStatus = 'answered';
+      // console.log(this.expectedAnswer);
       // increment the answered value from section object
       this.sectionObject[this.activeSectionIndex].attempted = this.sectionObject[this.activeSectionIndex].attempted + 1;
     }else{
-      this.questions.answerStatus = "skipped";
+      this.questions.answerStatus = "not-answered";
+      this.sectionObject[this.activeSectionIndex].questions[this.activeQuestionIndex].answerStatus = 'not-answered';
       // increment the answered value from section object
       this.sectionObject[this.activeSectionIndex].not_answered = this.sectionObject[this.activeSectionIndex].not_answered + 1;
     }
     this.postActivity(this.questions);
-    console.log(this.questions);
+    // console.log(this.questions);
 
     if (this.sectionObject[this.activeSectionIndex].questions[this.activeQuestionIndex + 1]) {
       this.activeQuestionIndex++;
@@ -274,15 +320,26 @@ export class TestComponent implements OnInit {
     this.scrollToTop();
   }
 
+
+  getQuestionClass(questionIndex): string {
+    let result = 'not-visited';
+    if (this.sectionObject[this.activeSectionIndex].questions[questionIndex]) {
+      return this.sectionObject[this.activeSectionIndex].questions[questionIndex].answerStatus;
+    }
+    return result;
+  }
+
   markForReview(){
 
     if (this.expectedAnswer) {
-      this.questions.answerStatus = "Answered And Review Later";
+      this.questions.answerStatus = "answered_review";
+      this.sectionObject[this.activeSectionIndex].questions[this.activeQuestionIndex].answerStatus = 'answered_review';
       // increment the answered value from section object
       this.sectionObject[this.activeSectionIndex].answered_marked = this.sectionObject[this.activeSectionIndex].answered_marked + 1;
       console.log(this.expectedAnswer);
     } else {
-      this.questions.answerStatus = "Review Later";
+      this.questions.answerStatus = "review_later";
+      this.sectionObject[this.activeSectionIndex].questions[this.activeQuestionIndex].answerStatus = 'review_later';
       this.sectionObject[this.activeSectionIndex].review_later = this.sectionObject[this.activeSectionIndex].review_later + 1;
     }
     
@@ -310,6 +367,7 @@ export class TestComponent implements OnInit {
   }
 
   postActivity(questions){
+    console.log(this.expectedAnswer);
     const data = {
       "test_id": '403',
       "section_id": this.sectionObject[this.activeSectionIndex].section_id,
@@ -319,8 +377,8 @@ export class TestComponent implements OnInit {
       // "time_taken": (questions.ticks * 1000),
       "time_taken": 1200,
       "questions_type": questions.questions_type,
-      "user_id": JSON.parse(localStorage.getItem('verified')).User_id,
-      "client_id": JSON.parse(localStorage.getItem('verified')).client_client_id,
+      "user_id": 2,
+      "client_id": 1,
       "attempt_status": questions.answerStatus,
       "questions_difficulty_level": questions.questions_difficulty_level,
       "questions_average_time": questions.questions_average_time,
@@ -335,6 +393,10 @@ export class TestComponent implements OnInit {
       .subscribe(
       data => {
         //start the timer back again to get time spent on the new question
+
+        // clear
+        this.clear();
+        this.multipleAnswerArray = [];
       },
       err => {
         console.log("error", err);
@@ -348,6 +410,48 @@ export class TestComponent implements OnInit {
         //   this.finishTest(false);
         // }
       });
+  }
+
+  singleSelectValue(input){
+    this.expectedAnswer = input.target.value;
+    console.log(this.expectedAnswer);
+  }
+
+  multipleSelectValue(input) {
+    
+    // console.log(input);
+    // if check bod is check then push the value else remove from array
+    if(input.target.checked){
+      this.multipleAnswerArray.push(input.target.value);
+      // console.log(this.multipleAnswerArray);
+    }else{
+      // console.log("remove element");
+      this.multipleAnswerArray.forEach( (value, i) => {
+        if (input.target.value == value){
+          this.multipleAnswerArray.splice(i,1);
+        }
+      });
+    }
+    this.expectedAnswer = this.convertIntoExpectedTest(this.multipleAnswerArray.sort());
+  }
+
+  convertIntoExpectedTest(array){
+    var string = "";
+    array.forEach( (val, i) => {
+      string += val;
+      if(array.length-1 != i){
+        string += ',';
+      }
+      
+    });
+    return string;
+  }
+
+  submit(){
+    var res = confirm("Are you sure you want to submit");
+    if(res){
+      this.routes.navigate(['/submit']);
+    }
   }
 
 }

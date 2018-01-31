@@ -1,0 +1,21 @@
+.complete{
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%);
+    position: absolute;
+    text-align: center;
+}
+
+button {
+    background-color: #aaaaaa;
+    color: #222;
+    border: none;
+    padding: 10px 20px;
+    margin: 19px 15px 0px 0px;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+button:hover{
+    background-color: #813488;
+    color: #fff;
+}

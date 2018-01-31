@@ -16,7 +16,7 @@ export class TestService {
             .map(res => res.json());
     }
 
-    getQuestionDetails(questionId, userId = 194, clientId = 1) {
+    getQuestionDetails(questionId, userId = 2, clientId = 1) {
         return this.http.get(`${this.baseUrl}/getQuestionDetailsWithOptionsUser?client_id=${clientId}&questions_id=${questionId}&user_id=${userId}`)
             .map(res => res.json());
     }

@@ -1,6 +1,18 @@
 $border: 1px solid #cccccc;
 $border-radius: 0.4em;
 
+.for-single div, .for-multiple div {
+    margin: 25px;
+}
+
+button.submit {
+    background-color: #2D70B6;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    margin: 19px 15px 0px 0px;
+}
+
 .test-screen {
     min-height: 100%;
     width: 100%;
@@ -9,12 +21,12 @@ $border-radius: 0.4em;
     -ms-user-select: none;
     user-select: none;
     .test-title-bar {
-        background-color: #525cec;
+        background-color: #2D70B6;
         color: #ffffff;
         padding: 1em;
     }
     .test-modal-bars {
-        background-color: #1b1b1b;
+        background-color: #222;
         text-align: end;
         padding: 0.2em 0;
         a {
@@ -23,6 +35,7 @@ $border-radius: 0.4em;
             &:hover {
                 color: #cccccc;
             }
+            text-decoration: none;
         }
         .modal {
             display: none;
@@ -62,11 +75,11 @@ $border-radius: 0.4em;
     .main-test-section {
         .top-section {
             width: 100%;
-            height: 20vh;
+            height: 17vh;
             .test-section {
                 width: 80%;
                 float: left;
-                height: 20vh; // full height is 87.2
+                height: 17vh; // full height is 87.2
                 border-right: $border;
                 .test-top-section {
                     background-color: #cccccc;
@@ -75,7 +88,7 @@ $border-radius: 0.4em;
                         padding: 0.4em;
                         .info {
                             display: inline-block;
-                            background-color: #7f87f1;
+                            background-color: #2D70B6;
                             padding: 0.6em;
                             border-radius: $border-radius;
                             color: #ffffff;
@@ -94,21 +107,21 @@ $border-radius: 0.4em;
                     }
                     .subject-section {
                         ul {
-                            border-top: 1px solid #000000;
-                            border-bottom: 1px solid #000000;
+                            border-top: 1px solid #5d5d5d;
+                            border-bottom: 1px solid #5d5d5d;
                             padding-left: 1em;
                             padding-right: 1em;
                             li {
-                                border-right: 1px solid #000000;
+                                border-right: 1px solid #5d5d5d;
                                 display: inline-block;
                                 padding: 0.5em;
                                 cursor: pointer;
                                 &:first-child {
-                                    border-left: 1px solid #000000;
+                                    border-left: 1px solid #5d5d5d;
                                 }
                             }
                             .active {
-                                background-color: #7f87f1;
+                                background-color: #2D70B6;
                             }
                         }
                     }
@@ -120,9 +133,9 @@ $border-radius: 0.4em;
                 width: 20%;
                 float: right;
                 background-color: #6d6c6c;
-                min-height: 20vh;
+                min-height: 17vh;
                 img {
-                    width: 45%;
+                    width: 44%;
                 }
             }
         }
@@ -141,7 +154,7 @@ $border-radius: 0.4em;
                 height: 67.2vh;
             }
             .language-selection {
-                background: #7f87f1;
+                background: #2D70B6;
                 padding: 0.5em;
                 p {
                     text-align: end;
@@ -180,10 +193,10 @@ $border-radius: 0.4em;
                     position: absolute;
                     right: 0;
                     top: 33%;
-                    height: 2.6em;
-                    background-color: #6d6c6c;
+                    height: 4em;
+                    background-color: #9d9d9d;
                     // color: #ffffff;
-                    border: 0.1em solid #000000;
+                    border: 0.1em solid #2d2d2d;
                     font-weight: bold;
                     padding: 0.18em;
                     cursor: pointer;
@@ -240,16 +253,22 @@ $border-radius: 0.4em;
                 }
                 button.save {
                     float: right;
-                    background-color: #525cec;
+                    background-color: #2D70B6;
                     color: #ffffff;
                     border: none;
                     margin-right: 4em;
                 }
                 button.submit {
                     float: right;
-                    background-color: #525cec;
+                    background-color: #2D70B6;
                     color: #ffffff;
                     border: none;
+                }
+                button:hover{
+                    background-color: #2D70B6;
+                    border-color: #2D70B6;
+                    color: #fff;
+
                 }
             }
             .question-status {
@@ -279,9 +298,12 @@ $border-radius: 0.4em;
                     }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
-                        background-position: -8px -52px;
+                        background-position: -5px -52px;
                         padding: 0.5em 0.8em;
                         float: left;
+                        width: 33px;
+                        height: 33px;
+                        text-align: center;
                     }
                 }
                 .not-answered {
@@ -297,9 +319,11 @@ $border-radius: 0.4em;
                     }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
-                        background-position: -43px -52px;
+                        background-position: -39px -52px;
                         padding: 0.5em 0.8em;
                         float: left;
+                        width: 33px;
+                        height: 33px;
                     }
                 }
                 .not-visited {
@@ -316,9 +340,12 @@ $border-radius: 0.4em;
                     }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
-                        background-position: -106px -52px;
+                        background-position: -103px -54px;
                         padding: 0.5em 0.9em;
                         float: left;
+                        width: 33px;
+                        height: 33px;
+                        text-align: center;
                     }
                 }
                 .review {
@@ -334,9 +361,12 @@ $border-radius: 0.4em;
                     }
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
-                        background-position: -75px -52px;
+                        background-position: -71px -52px;
                         padding: 0.5em 0.85em;
                         float: left;
+                        width: 33px;
+                        height: 33px;
+                        text-align: center;
                     }
                 }
                 .answered-review {
@@ -347,10 +377,11 @@ $border-radius: 0.4em;
                     span {
                         float: left;
                         background: url("../../assets/images/questions-sprite.png") no-repeat scroll 0 0 transparent;
-                        background-position: -9px -85px;
-                        vertical-align: baseline;
-                        padding: 0.5em 0.8em;
-                        // display: inline-block;
+                        background-position: -5px -85px;
+                        width: 33px;
+                        height: 33px;
+                        padding: 8px;
+                        text-align: center;
                     }
                 }
             }
@@ -359,7 +390,7 @@ $border-radius: 0.4em;
                 height: 31vh;
                 overflow: hidden;
                 .subject-header {
-                    background-color: #525cec;
+                    background-color: #2D70B6;
                     padding: 0.4em;
                     h4 {
                         color: #ffffff;
@@ -374,11 +405,12 @@ $border-radius: 0.4em;
                     overflow: auto;
                     span {
                         background: url("../../assets/images/questions-sprite.png") no-repeat 0 0 transparent;
-                        background-position: -157px -6px;
-                        width: 37px;
-                        height: 41px;
-                        padding: 0.8em 1.15em;
-                        margin: 0.2em;
+                        background-position: -157px -3px;
+                        width: 50px;
+                        height: 50px;
+                        padding: 10px;
+                        text-align: center;
+                        margin: 0.1em;
                         cursor: pointer;
                         float: left;
                     }
@@ -386,7 +418,7 @@ $border-radius: 0.4em;
                 .submit {
                     button {
                         float: right;
-                        background-color: #525cec;
+                        background-color: #2D70B6;
                         color: #ffffff;
                         border: none;
                     }
@@ -394,4 +426,24 @@ $border-radius: 0.4em;
             }
         }
     }
+}
+
+.not-answered{
+    background-position: -57px 1px !important;
+}
+
+.answered{
+    background-position: -4px -1px !important;
+}
+
+.not-visited{
+    background-position: -157px -3px !important;
+}
+
+.review_later{
+    background-position: -107px -1px !important;
+}
+
+.answered_review{
+    background-position: -65px -177px !important;
 }
