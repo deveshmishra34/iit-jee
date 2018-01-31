@@ -6,13 +6,13 @@ import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { TestService } from './services/test.service';
-import { TestAckComponent } from './testAck/testAck.component';
+// import { TestAckComponent } from './testAck/testAck.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RoutedComponents,
-    TestAckComponent
+    RoutedComponents
+    // TestAckComponent
   ],
   imports: [
     BrowserModule,

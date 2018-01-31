@@ -30,5 +30,6 @@ export const RoutedComponents = [
     InstructionsComponent,
     TestComponent,
     TestInstructionsComponent,
-    objNgFor
+    objNgFor,
+    TestAckComponent
 ];
