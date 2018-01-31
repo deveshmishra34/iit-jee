@@ -3,8 +3,8 @@ import { Component, ViewChild } from '@angular/core';
 
 @Component({
 	selector: 'app-TestAck',
-	templateUrl: './TestAck.component.html',
-	styleUrls: ['./TestAck.component.scss']
+	templateUrl: './testAck.component.html',
+	styleUrls: ['./testAck.component.scss']
 })
 export class TestAckComponent {
 	constructor(private router: Router) {
