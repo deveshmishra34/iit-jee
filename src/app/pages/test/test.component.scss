@@ -2,7 +2,7 @@ $border: 1px solid #cccccc;
 $border-radius: 0.4em;
 
 .for-single div, .for-multiple div {
-    margin: 25px;
+    margin: 15px;
 }
 
 button.submit {
@@ -89,10 +89,11 @@ button.submit {
                         .info {
                             display: inline-block;
                             background-color: #2D70B6;
-                            padding: 0.6em;
-                            border-radius: $border-radius;
+                            padding: 6px;
+                            border-radius: 2px;
                             color: #ffffff;
-                            margin-left: 2em;
+                            margin-left: 0em;
+                            height: 35px;
                         }
                     }
                     .timer {
@@ -114,7 +115,7 @@ button.submit {
                             li {
                                 border-right: 1px solid #5d5d5d;
                                 display: inline-block;
-                                padding: 0.5em;
+                                padding: 6px;
                                 cursor: pointer;
                                 &:first-child {
                                     border-left: 1px solid #5d5d5d;
@@ -170,16 +171,17 @@ button.submit {
                 height: 52.5vh;
                 overflow: auto;
                 position: relative;
-                padding: 1em;
+                padding: 5px;
 
                 img:first-child, img:last-child {
                     float: right;
                     cursor: pointer;
+                    width: 3%;
                 }
 
                 .questions-text {
                     clear: both;
-                    margin-bottom: 2em;
+                    margin-bottom: 1em;
                 }
 
                 .show-question {
@@ -239,7 +241,7 @@ button.submit {
                 width: 100%;
                 bottom: 0;
                 border-top: $border;
-                padding: 0.4em 0.8em;
+                padding: 5px 8px;
                 background-color: #ffffff;
                 button {
                     width: auto;
@@ -283,7 +285,7 @@ button.submit {
             }
             .status-info {
                 width: 100%;
-                padding: 0.5em;
+                padding: 1px;
                 text-align: center;
                 font-size: 0.9em;
                 .answered {
@@ -399,9 +401,9 @@ button.submit {
                     }
                 }
                 .question-number {
-                    padding: 2em 1em;
+                    padding: 2px 1px;
                     white-space: normal;
-                    height: 28vh;
+                    height: 22vh;
                     overflow: auto;
                     span {
                         background: url("../../../assets/images/questions-sprite.png") no-repeat 0 0 transparent;
