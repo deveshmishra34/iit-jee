@@ -1,0 +1,23 @@
+import { Component, OnInit, ViewChild, Input, ElementRef, Renderer2 } from '@angular/core';
+import { TestService } from "../../shared/_services/test.service";
+import { Router } from '@angular/router';
+
+@Component({
+    selector: 'pp-test',
+    templateUrl: './test.component.html',
+    styleUrls: ['./test.component.scss']
+})
+export class TestComponent implements OnInit {
+
+    select: string = "english";
+
+    constructor(
+        private _testService : TestComponent
+    ){
+
+    }
+
+    ngOnInit(){
+
+    }
+}
