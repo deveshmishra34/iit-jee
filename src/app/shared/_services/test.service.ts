@@ -7,7 +7,7 @@ import "rxjs/add/operator/map";
 
 export class TestService {
 
-    baseUrl: string = "http://13.126.50.31:3003";
+    baseUrl: string = "http://35.154.35.118:3003";
 
     constructor(private http: Http) { }
 
