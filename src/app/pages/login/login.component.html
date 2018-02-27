@@ -1,0 +1,17 @@
+<div class="main-head">
+  <div class="login-form">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (submit)="loginUser()" method="post">
+      <div>
+        <input type="text" formControlName="rollnumber" [(ngModel)]="userInfo.rollnumber" name="rollnumber" placeholder="Enter roll number">
+      </div>
+      <div>
+        <input type="password" formControlName="password" [(ngModel)]="userInfo.password" name="password" placeholder="Enter your password">
+      </div>
+      
+      <button [hidden]="processing" [disabled]="loginForm.invalid" type="submit">Login</button>
+      <p [hidden]="!processing">Please wait...</p>
+      <p>{{errorMsg}}</p>
+    </form>
+  </div>
+</div>

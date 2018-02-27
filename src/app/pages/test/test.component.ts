@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input, ElementRef, Renderer2 } from '@angular/core';
-import { TestService } from "../services/test.service";
+import { TestService } from "../../shared/_services/test.service";
 import { Router } from '@angular/router';
 
 @Component({
