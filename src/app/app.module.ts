@@ -6,6 +6,7 @@ import { ReactiveFormsModule,FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 
+import { MathJaxDirective } from './shared/_directives/index';
 import { AuthGuardService } from './shared/_guard/index';
 import {
   TestService,
@@ -22,6 +23,7 @@ import {
   declarations: [
     AppComponent,
     RoutedComponents,
+    MathJaxDirective
     // TestAckComponent,
   ],
   imports: [

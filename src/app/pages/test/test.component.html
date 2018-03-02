@@ -4,13 +4,13 @@
   </div>
 
   <div class="test-modal-bars">
-    <a href="javascript:void(0)" (click)="showPaper()">Question Paper</a>
+    <!-- <a href="javascript:void(0)" (click)="showPaper()">Question Paper</a>
     <div class="modal" #questionModal>
       <div class="modal-content">
         <span id="" (click)="closeQuestionModal()">&times;</span>
         <p>Question Paper goes here...</p>
       </div>
-    </div>
+    </div> -->
     <a href="javascript:void(0)" (click)="showInstruction()">Instructions</a>
     <div class="modal" #instructionModal>
       <div class="modal-content">
@@ -42,9 +42,9 @@
 
 
           <div class="subject-section">
-            <ul *ngIf="sectionObject">
+            <ul>
               <!-- <li *ngFor="let section of sections | objNgFor" (click)="getQuestionOfSection(sections[section])">{{ section }}</li> -->
-              <li *ngFor="let section of sectionObject; let sectionIndex = index" (click)="getQuestionOfSection(sectionIndex)" [ngClass]="{'active': sectionObject[activeSectionIndex]['section_name'] == section['section_name'] }">{{ section['section_name'] }}</li>
+              <li *ngFor="let section of sectionObject; let i = index" (click)="getQuestionOfSection(i)" [ngClass]="{'active': sectionObject[activeSectionIndex]['section_name'] == section['section_name'] }">{{section['section_name']}}</li>
             </ul>
           </div>
         </div>
@@ -73,18 +73,19 @@
         </div>
         <div class="questions" #scroll *ngIf="questions">
           <img src="../../assets/images/Down.png" alt="down" (click)="scrollToBottom()">
-          <div class="questions-text" >{{ questions.questions_text }}</div>
+
+          <div class="questions-text" [MathJax]="questions.questions_text"></div>
           <div *ngIf="questions" class="show-question">
             <img [src]="questions.questions_image" alt="question image">
           </div>
           <button type="button" (click)="fullWidth = !fullWidth">{{ fullWidth? '&gt;' : '&lt;' }}</button>
+          
           <!-- For single type question -->
           <div class="for-single" *ngIf="questions.questions_type === 'single' && questions.options">
             <div *ngFor="let option of questions.options; let i = index">
               <input type="radio" name="user_answer" (change)="singleSelectValue($event)" value='{{i+1}}' id="single_{{i+1}}"> {{option.text}}
             </div>
           </div>
-
 
           <!-- For multiple type question -->
           <div class="for-multiple" *ngIf="questions.questions_type === 'multiple' && questions.options">
@@ -106,6 +107,7 @@
               </ul>
             </div>
           </div>
+
           <img src="../../assets/images/Up.png" alt="down" (click)="scrollToTop()">
         </div>
 
