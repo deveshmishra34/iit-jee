@@ -14,13 +14,13 @@ export class LoginComponent implements OnInit {
   processing:boolean = false;
   errorMsg:string="";
 
-  userInfo:{username:string, password: string} = {
-    username : "",
+  userInfo: { rollnumber:string, password: string} = {
+    rollnumber : "",
     password : ""
   }
 
   loginForm = new FormGroup({
-    rollnumber : new FormControl(this.userInfo.username, [
+    rollnumber: new FormControl(this.userInfo.rollnumber, [
       Validators.required
     ]),
     password : new FormControl(this.userInfo.password, [

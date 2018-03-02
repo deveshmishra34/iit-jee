@@ -18,7 +18,7 @@ export class UsersService {
     private _http: Http
   ) {}
 
-  loginUser(user:{username:string, password:string}){
+  loginUser(user:{rollnumber:string, password:string}){
 
     console.log(APIUrls.LOGIN);
     
