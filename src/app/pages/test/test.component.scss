@@ -275,7 +275,7 @@ button.submit {
             }
             .question-status {
                 width: 20%;
-                height: 59.5vh;
+                height: 60vh;
                 background-color: #cccccc;
                 float: right;
                 border : 2px solid;
@@ -389,7 +389,7 @@ button.submit {
             }
             .subject-question-section {
                 clear: both;
-                height: 31vh;
+                height: 35vh;
                 overflow: hidden;
                 .subject-header {
                     background-color: #2D70B6;
@@ -403,7 +403,7 @@ button.submit {
                 .question-number {
                     padding: 2px 1px;
                     white-space: normal;
-                    height: 22vh;
+                    height: 27vh;
                     overflow: auto;
                     span {
                         background: url("../../../assets/images/questions-sprite.png") no-repeat 0 0 transparent;
