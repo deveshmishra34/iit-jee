@@ -22,8 +22,16 @@
           <h2 *ngIf="select === 'english'">Important Notes</h2>
           <h2 *ngIf="select === 'hindi'">महत्वपूर्ण लेख</h2>
           <div class="instructions">
-            <ul *ngIf="select === 'english'">
+            <!-- <ul *ngIf="select === 'english'">
               {{genIns}}
+            </ul> -->
+            <ul *ngIf="select === 'english'">
+              <li>The purpose of this MOCK TEST is to familiarize the candidates with the Computer Based Test (CBT) environment of the JEE
+                (Advanced) – 2018.</li>
+              <li>Candidates may use this MOCK TEST to get acclimatized with the functionalities of CBT.</li>
+              <li>This MOCK TEST has used previous years' questions of JEE (Advanced).</li>
+              <li>The type of questions and illustrative marking scheme in this MOCK TEST is in NO WAY INDICATIVE of the type of questions
+                and marking scheme of JEE (Advanced) – 2018 question paper.</li>
             </ul>
             <ul *ngIf="select === 'hindi'">
               <li>इस मॉक टेस्ट का उद्देश्य जेईई (एडवांस्ड) - 2018 के कंप्यूटर आधारित टेस्ट (सीबीटी) पर्यावरण के साथ उम्मीदवारों को परिचित करना है।</li>

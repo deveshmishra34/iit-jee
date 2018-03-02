@@ -23,7 +23,7 @@ button.submit {
     .test-title-bar {
         background-color: #2D70B6;
         color: #ffffff;
-        padding: 1em;
+        padding: 12px;
     }
     .test-modal-bars {
         background-color: #222;
@@ -168,7 +168,7 @@ button.submit {
                 }
             }
             .questions {
-                height: 53.5vh;
+                height: 52.5vh;
                 overflow: auto;
                 position: relative;
                 padding: 5px;
@@ -275,7 +275,7 @@ button.submit {
             }
             .question-status {
                 width: 20%;
-                height: 59.7vh;
+                height: 59.5vh;
                 background-color: #cccccc;
                 float: right;
                 border : 2px solid;
